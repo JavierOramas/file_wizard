@@ -12,7 +12,7 @@ def purge(directory:str, ext:str):
         for file in files:
             if file.endswith(ext):
                 print(f'Deleting {file}')
-                os.remove(file)
+                os.remove(os.path.join(cp,file))
 
 
 @app.command(name='extract', help='extract all files within a directory with a given extension')
