@@ -1,0 +1,4 @@
+file_wizard.egg-info/PKG-INFO
+file_wizard.egg-info/SOURCES.txt
+file_wizard.egg-info/dependency_links.txt
+file_wizard.egg-info/top_level.txt

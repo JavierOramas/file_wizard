@@ -1,0 +1,38 @@
+Metadata-Version: 2.1
+Name: file-wizard
+Version: 0.0.3
+Summary: python package to manage files to avoid repetitive tasks such as move or delete
+Home-page: https://github.com/JavierOramas/file-wizard
+Author: Javier Oramas López
+Author-email: javiale2000@gmail.com
+License: MIT LICENSE
+Description: # Directory Filter
+        
+        ## Installation
+        
+        `pip install -r requirements.txt`
+        
+        ## Usage
+        
+        ### Purge
+        
+        To remove all files inside a directory with a given extension run:
+        `python3 script.py purge [directory] [extension]`
+        
+        ### Extract video, audio or photo files
+        To extract all files within a choosen category in a directory and move them to another run:
+        `python3 script.py extract [category] [source] [destination]`
+        
+        ### Extract Custom Extension
+        To extract all files with a given extension in a directory and move them to another run:
+        
+        `python3 script.py extract_custom [directory] [destinantion] [extension]`
+        
+        ### Enumerate video, audio or photo files
+        To count all files within a choosen category in a directory:
+        `python3 script.py enumerate [category] [source]`
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: MIT License 
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
