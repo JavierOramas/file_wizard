@@ -4,9 +4,12 @@ import shutil
 import typer
 from typer import Typer
 from collections import defaultdict
+from pathlib import Path
 import hashlib
 import sys
 import filetype
+from video_diet import folder, file
+
 
 app = Typer()
 
@@ -156,6 +159,36 @@ def extract_videos(types:str, source:str):
     #     for f in
 # extract_videos(source_folder,dest_folder)                
 
+@app.command(name='video-diet-folder', help='https://github.com/hiancdtrsnm/video-diet integration for folders')
+def video_diet_folder(path: Path = typer.Argument(
+    default='.',
+    exists=True,
+    file_okay=True,
+    dir_okay=True,
+    readable=True,
+    resolve_path=True
+), ignore_extension: str = typer.Option(
+    default=None
+), ignore_path: Path = typer.Option(
+    default=None,
+    exists=True,
+    file_okay=True,
+    dir_okay=True,
+    readable=True,
+    resolve_path=True
+)):
+    folder(path=path, ignore_extension=ignore_extension, ignore_path=ignore_path)
+
+@app.command(name='video-diet-file', help='https://github.com/hiancdtrsnm/video-diet integration for folders')
+def video_diet_file(path: Path = typer.Argument(
+    default=None,
+    exists=True,
+    file_okay=True,
+    dir_okay=False,
+    readable=True,
+    resolve_path=True
+)):
+    file(path=path)
 
 if __name__ == '__main__':
     app()
