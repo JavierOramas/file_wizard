@@ -27,3 +27,12 @@ To count all files within a choosen category in a directory:
 ### Find And remove duplicate files
 To find all duplicate files in a directory:
 `python3 script.py duplicates [directory]`
+if runned like:
+`python3 script.py duplicates`
+it uses the script path as directory
+
+Everytime that a match the program will ask you what to do:</br>
+
+0: leave both files</br>
+1: remove the first element</br>
+2: remove the second element</br>
