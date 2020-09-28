@@ -1,10 +1,12 @@
 import os
+from os import path
 import shutil
 import typer
 from typer import Typer
 from collections import defaultdict
 import hashlib
 import sys
+import filetype
 
 app = Typer()
 
@@ -47,11 +49,14 @@ def duplicates(directory:str=typer.Argument('.'), hash=hashlib.sha1):
                 hashes_by_size[file_size].append(full_path)
             except (OSError, ):
                 continue
+            
     for size_in_bytes, files in hashes_by_size.items():
+        
         if len(files) < 2:
             continue
         
         for file in files:
+            
             try:
                 small_hash = get_hash(file, first_chunk_only=True)
                 hashes_on_1k[(small_hash, size_in_bytes)].append(file)
@@ -100,7 +105,7 @@ def purge(directory:str, ext:str):
                 os.remove(os.path.join(cp,file))
 
 
-@app.command(name='extract_one', help='extract all files within a directory with a given extension')
+@app.command(name='extract_ext', help='extract all files within a directory with a given extension')
 def extract(directory:str, destination:str, ext:str ):
     
     os.makedirs(destination, exist_ok=True)
@@ -116,43 +121,34 @@ def extract(directory:str, destination:str, ext:str ):
                 print(f'Moving {file}')
                 shutil.move(os.path.join(cp,file), os.path.join(destination,file))
 
-ext = {}
-ext['Video'] = ['.mpeg','.mp4','.avi','.mpg','.3gp','.webm', '.mov', '.mkv','.wmv', '.vob', '.ogg', '.ogv']
-ext['Audio'] = [ '.mp3', '.wav', '.aac', '.wma', '.dss', '.dvf', '.m4p', '.midi']
-ext['Pictures'] = ['.jpg', '.jpeg', '.png', '.jfif', '.exif', '.tiff', '.gif', '.gif', '.bmp', '.ppm', '.pgm', '.pbm', '.pnm', '.webp', '.heif', '.img', '.ico']
-
-def matches_type(f, types):
-    for i in ext[types]:
-        if(f.lower().endswith(i)):
-            return True
-    return False
-
-def ends(f,type):
-    return f.lower().endswith(type)
-
-@app.command(name='extract',help='extracts all [file_types] (Videos,Audio,Pictures) in [Source Folder] to [Destination Folder]')
+@app.command(name='extract',help='extracts all [file_types] (Videos,Audio,Image) in [Source Folder] to [Destination Folder]')
 def extract_videos(types:str, source:str, dest_folder:str):
+    
+    types = types.lower()
     
     os.makedirs('../'+dest_folder,exist_ok=True)
     for cp,dir,files in os.walk(source):
         for f in files:
-            if matches_type(f,types):
+            guess = filetype.guess(path.join(cp,f))
+            if guess and types in guess.mime:
                 os.makedirs(path.join('../'+dest_folder,cp[2:]),exist_ok=True)
                 shutil.move(path.join(cp,f),path.join('../'+dest_folder,cp[2:]))
         if len(os.listdir(cp) ) == 0:
             os.rmdir(cp)
 
-@app.command(name='enumerate',help='extracts all [file_types] (Videos,Audio,Pictures) in [Source Folder] to [Destination Folder]')
-def extract_videos(types:str, source:str, dest_folder:str):
+@app.command(name='enumerate',help='Counts all [file_types] (Videos,Audio,Image) in [Source Folder]')
+def extract_videos(types:str, source:str):
     
-    os.makedirs('../'+dest_folder,exist_ok=True)
+    types = types.lower()
+    
     index = 0
     for cp,dir,files in os.walk(source):
         for f in files:
-            if ends(f,types):
-                os.makedirs(path.join('../'+dest_folder,cp[2:]),exist_ok=True)
-                shutil.move(path.join(cp,f),path.join('../'+dest_folder,str(index)+'.jpg'))
-                index+=1
+            guess = filetype.guess(path.join(cp,f))
+
+            if guess and types in guess.mime:
+                index = index + 1
+    typer.secho(str(index))
         # if len(os.listdir(cp) ) == 0:
         #     os.rmdir(cp)
     # for cp,dir,files in os.walk(dest_folder):

@@ -7,7 +7,6 @@
 ## Usage
 
 ### Purge
-
 To remove all files inside a directory with a given extension run:<br>
 `python3 script.py purge [directory] [extension]`
 
@@ -18,7 +17,7 @@ To extract all files within a choosen category in a directory and move them to a
 ### Extract Custom Extension
 To extract all files with a given extension in a directory and move them to another run:<br>
 
-`python3 script.py extract_custom [directory] [destinantion] [extension]`
+`python3 script.py extract_ext [directory] [destinantion] [extension]`
 
 ### Enumerate video, audio or photo files
 To count all files within a choosen category in a directory:<br>
@@ -33,7 +32,6 @@ if runned like:<br>
 it uses the script path as directory
 
 Everytime that a match the program will ask you what to do:<br>
-
 0: leave both files<br>
 1: remove the first element<br>
 2: remove the second element<br>
