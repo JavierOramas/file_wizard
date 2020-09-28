@@ -1,5 +1,6 @@
 import os
 import shutil
+import typer
 from typer import Typer
 from collections import defaultdict
 import hashlib
@@ -31,7 +32,7 @@ def get_hash(filename, first_chunk_only=False, hash=hashlib.sha1):
     return hashed
 
 @app.command(name='duplicates', help='Find and remove all duplicate files in a folder')
-def duplicates(directory:str, hash=hashlib.sha1):
+def duplicates(directory:str=typer.Argument('.'), hash=hashlib.sha1):
     hashes_by_size = defaultdict(list)
     hashes_on_1k = defaultdict(list)
     hashes_full = {} 
@@ -68,13 +69,21 @@ def duplicates(directory:str, hash=hashlib.sha1):
                     duplicate = hashes_full.get(full_hash)
                     
                     if duplicate:
-                        print('Duplicate Found: (1) {} and (2) {}'.format(file, duplicate))
-                        option = input('Select what to do with them (0,1,2): ') 
-                        if option == '1':
-                            os.remove(file)
-                        elif option == '2':
-                            os.remove(duplicate)
-                            
+                        flag = True
+                        while flag:
+                            print('Duplicate Found: (1) {} and (2) {}'.format(file, duplicate))
+                            option = input('Select what to do with them (0,1,2): ') 
+                            if option == '1':
+                                os.remove(file)
+                                flag = False
+                            elif option == '2':
+                                os.remove(duplicate)
+                                flag = False
+                            elif option == '0':
+                                files_list.remove(file)
+                                flag = False
+                            else:
+                                print('\nPlease Choose a valid option\n')
                     else:
                         hashes_full[full_hash] = file
                 except (OSError, ):
