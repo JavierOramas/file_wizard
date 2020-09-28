@@ -23,3 +23,7 @@ To extract all files with a given extension in a directory and move them to anot
 ### Enumerate video, audio or photo files
 To count all files within a choosen category in a directory:
 `python3 script.py enumerate [category] [source]`
+
+### Find And remove duplicate files
+To find all duplicate files in a directory:
+`python3 script.py duplicates [directory]`
