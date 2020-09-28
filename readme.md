@@ -1,3 +1,4 @@
+[![Last commit](https://img.shields.io/github/last-commit/javieroramas/file-wizard.svg?style=flat)](https://github.com/javieroramas/file_wizard/commits)[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/javieroramas/file-wizard)](https://github.com/javieroramas/file_wizard/commits) [![Github Stars](https://img.shields.io/github/stars/javieroramas/file-wizard?style=flat&logo=github)](https://github.com/javieroramas/file_wizard) [![Github Forks](https://img.shields.io/github/forks/javieroramas/file-wizard?style=flat&logo=github)](https://github.com/javieroramas/file_wizard) [![Github Watchers](https://img.shields.io/github/watchers/javieroramas/file-wizard?style=flat&logo=github)](https://github.com/javieroramas/file_wizard) [![GitHub contributors](https://img.shields.io/github/contributors/javieroramas/file-wizard)](https://github.com/javieroramas/file_wizard/graphs/contributors)
 # Directory Filter
 
 ## Installation
