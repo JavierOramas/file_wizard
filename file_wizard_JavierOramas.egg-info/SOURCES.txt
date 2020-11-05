@@ -1,0 +1,6 @@
+setup.py
+file_wizard_JavierOramas.egg-info/PKG-INFO
+file_wizard_JavierOramas.egg-info/SOURCES.txt
+file_wizard_JavierOramas.egg-info/dependency_links.txt
+file_wizard_JavierOramas.egg-info/top_level.txt
+file_wizard_pkg/__init__.py

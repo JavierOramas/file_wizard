@@ -1,7 +1,7 @@
 import setuptools
 
 with open('readme.md', 'r') as fh:
-    long_description = fh.head()
+    long_description = fh.read()
 
 setuptools.setup(
     name='file-wizard-JavierOramas', 
